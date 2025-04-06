@@ -48,10 +48,7 @@ const botName = argv.bot;
 const mineflayer = require('mineflayer');
 const { pathfinder, Movements, goals: { GoalNear } } = require('mineflayer-pathfinder');
 
-const bot = mineflayer.createBot({
-  host: 'localhost',
-  username: botName,
-});
+const bot = mineflayer.createBot({ host: 'localhost', username: botName });
 
 bot.on('spawn', () => {
   // Load the pathfinder plugin and set the movements
@@ -63,11 +60,15 @@ bot.on('spawn', () => {
   // Check for the player every {interval} ms
   setInterval(() => {
     // Find the nearest entity with the given name
-    const entity = bot.nearestEntity((e) => e.username === playerName);
-    if (entity !== null) {
+    bot.nearestEntity((e) => {
+      if (e.type !== 'player' && e.username !== playerName) {
+        return false;
+      }
+
       // Set the goal to the player
-      const { x, y, z } = entity.position;
+      const { x, y, z } = e.position;
       bot.pathfinder.setGoal(new GoalNear(x, y, z, range));
-    }
+      return true;
+    });
   }, interval);
 });

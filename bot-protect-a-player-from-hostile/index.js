@@ -24,7 +24,7 @@ const argv = yargs(hideBin(process.argv))
   })
   .option('range', {
     alias: 'r',
-    description: 'Range in blocks to check for the player',
+    description: 'Range in blocks to check for the player and hostiles',
     type: 'number',
     default: 3
   })
@@ -48,10 +48,7 @@ const botName = argv.bot;
 const mineflayer = require('mineflayer');
 const { pathfinder, Movements, goals: { GoalNear } } = require('mineflayer-pathfinder');
 
-const bot = mineflayer.createBot({
-  host: 'localhost',
-  username: botName,
-});
+const bot = mineflayer.createBot({ host: 'localhost', username: botName });
 
 bot.on('spawn', () => {
   // Load the pathfinder plugin and set the movements
@@ -63,27 +60,24 @@ bot.on('spawn', () => {
   // Check for the player every {interval} ms
   setInterval(() => {
     // Find the nearest entity with the given name
-    const entity = bot.nearestEntity((e) => e.username === playerName);
-    if (entity !== null) {
+    bot.nearestEntity((e) => {
+      if (e.type !== 'player' && e.username !== playerName) {
+        return false;
+      }
       // Set the goal to the player
-      const { x, y, z } = entity.position;
+      const { x, y, z } = e.position;
       bot.pathfinder.setGoal(new GoalNear(x, y, z, range));
 
-      // Check for hostile entity within bot's range in all directions
+      // Check for hostile entities and attack them
       bot.nearestEntity((e) => {
-        if (e.type !== 'hostile' || !e.position || !bot.entity?.position) {
+        if (e.type !== 'hostile') {
           return false;
         }
-
-        const dx = Math.abs(e.position.x - bot.entity.position.x);
-        const dy = Math.abs(e.position.y - bot.entity.position.y);
-        const dz = Math.abs(e.position.z - bot.entity.position.z);
-    
-        if (dx <= 5 && dy <= 5 && dz <= 5) {
+        if (bot.entity.position.distanceTo(e.position) <= range) {
           bot.attack(e)
         }
         return true
       });
-    }
+    })
   }, interval);
 });
