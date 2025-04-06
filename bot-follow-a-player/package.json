@@ -1,0 +1,14 @@
+{
+  "name": "bot-follow-a-player",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "mineflayer": "^4.27.0",
+    "mineflayer-pathfinder": "^2.4.5",
+    "yargs": "^17.7.2"
+  }
+}
