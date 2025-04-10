@@ -46,8 +46,7 @@ This bot will protect a (nearby) player with a given name from hostiles.
         --version   Show version number                                  [boolean]
     -p, --player    Name of the player to follow               [string] [required]
     -i, --interval  Interval in ms to check for the player [number] [default: 500]
-    -r, --range     Range in blocks to check for the player and hostiles
-                                                            [number] [default: 3]
+    -r, --range     Range in blocks to check for the player  [number] [default: 3]
     -b, --bot       Name for the bot                     [string] [default: "bot"]
     -h, --help      Show help                                            [boolean]
   ```

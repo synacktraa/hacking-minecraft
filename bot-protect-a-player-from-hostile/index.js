@@ -24,7 +24,7 @@ const argv = yargs(hideBin(process.argv))
   })
   .option('range', {
     alias: 'r',
-    description: 'Range in blocks to check for the player and hostiles',
+    description: 'Range in blocks to check for the player',
     type: 'number',
     default: 3
   })
@@ -42,7 +42,8 @@ const argv = yargs(hideBin(process.argv))
 // Extract parameters from parsed arguments
 const playerName = argv.player;
 const interval = argv.interval;
-const range = argv.range;
+const playerRange = argv.range;
+const hostileRange = argv.range * 1.5;
 const botName = argv.bot;
 
 const mineflayer = require('mineflayer');
@@ -66,15 +67,17 @@ bot.on('spawn', () => {
       }
       // Set the goal to the player
       const { x, y, z } = e.position;
-      bot.pathfinder.setGoal(new GoalNear(x, y, z, range));
+      bot.pathfinder.setGoal(new GoalNear(x, y, z, playerRange));
 
       // Check for hostile entities and attack them
       bot.nearestEntity((e) => {
         if (e.type !== 'hostile') {
           return false;
         }
-        if (bot.entity.position.distanceTo(e.position) <= range) {
-          bot.attack(e)
+        if (bot.entity.position.distanceTo(e.position) <= hostileRange) {
+          bot.lookAt(e.position, true).then(() => {
+            bot.attack(e)
+          });
         }
         return true
       });
