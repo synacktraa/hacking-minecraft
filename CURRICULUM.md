@@ -1,6 +1,6 @@
 # Hacking Minecraft with AI — Curriculum
 
-Learn AI and LLMs the fun way — by building intelligent bots in Minecraft! This curriculum takes you from creating your first bot to controlling it with Claude through MCP.
+This curriculum takes you from creating your first Minecraft bot to controlling it with Claude through MCP.
 
 ## Outline
 
@@ -393,13 +393,9 @@ At this point we have a bot with hardcoded behaviors — it always follows, alwa
 
 ### Overview
 
-In the first two tutorials, we wrote bots with hardcoded behavior — the bot *always* follows, *always* attacks, and responds to a fixed set of chat patterns. What if instead of writing all that if/else logic ourselves, we let an LLM decide what to do?
+In the first two tutorials, we wrote bots with hardcoded behavior — the bot *always* follows, *always* attacks, and responds to a fixed set of chat patterns. In this tutorial, we'll expose those behaviors as MCP tools that Claude can call on demand.
 
-That's what [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) enables. MCP lets you expose **tools** — well-defined actions with names, descriptions, and parameters — that an LLM like Claude can call. Instead of writing behavior logic, we write tools and let Claude figure out when to use them.
-
-Here's the mental shift:
-- **Tutorials 1 & 2:** We write the brain (if player nearby → follow, if hostile nearby → attack)
-- **Tutorial 3:** We write the hands (tools the bot can use) and let Claude be the brain
+[MCP (Model Context Protocol)](https://modelcontextprotocol.io/) lets you define **tools** — actions with names, descriptions, and parameters — that Claude can discover and call. We define what the bot *can* do, and Claude decides *when* to do it.
 
 ### Step 1: Set up the project
 
@@ -880,4 +876,4 @@ Once configured, you can ask Claude things like:
 - *"Follow the player Synacktra and protect him from hostiles"*
 - *"Stop the bot from following me"*
 
-The key difference from Tutorials 1 and 2: you're not writing behavior logic anymore. Claude reads the tool descriptions, understands the game context from your messages, and decides which tools to call. You could ask it *"follow me and protect me from mobs"* and it would call `followPlayer` with `protectFromHostiles: true` — the same behavior we hardcoded in Tutorial 2, but now driven by an LLM.
+The key difference from Tutorials 1 and 2: you're not writing behavior logic anymore. Claude reads the tool descriptions, understands the game context from your messages, and decides which tools to call. You could ask it *"follow me and protect me from mobs"* and it would call `followPlayer` with `protectFromHostiles: true` — the same behavior we hardcoded in Tutorial 2.

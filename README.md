@@ -1,6 +1,6 @@
 # Hacking Minecraft
 
-Learn AI and LLMs the fun way — by building intelligent bots in Minecraft!
+Build intelligent Minecraft bots — from simple followers to Claude-controlled agents.
 
 ## Getting Started
 
