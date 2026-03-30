@@ -1,12 +1,17 @@
 /**
  * Script for creating a bot to follow a particular (nearby) player
- * 
+ *
  * Usage:
- * node index.js --player <name> [--interval <ms>] [--range <blocks>] [--bot <name>]
+ * npx tsx src/index.ts --player <name> [--interval <ms>] [--range <blocks>] [--bot <name>]
  */
 
-const yargs = require('yargs/yargs');
-const { hideBin } = require('yargs/helpers');
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
+import mineflayer from 'mineflayer';
+import mineflayerPathfinder from 'mineflayer-pathfinder';
+
+const { pathfinder, Movements, goals } = mineflayerPathfinder;
+const { GoalNear } = goals;
 
 // Parse command line arguments
 const argv = yargs(hideBin(process.argv))
@@ -37,7 +42,7 @@ const argv = yargs(hideBin(process.argv))
   .usage('Usage: $0 --player <name> [--interval <ms>] [--range <blocks>] [--bot <name>]')
   .help()
   .alias('help', 'h')
-  .argv;
+  .parseSync();
 
 // Extract parameters from parsed arguments
 const playerName = argv.player;
@@ -45,16 +50,13 @@ const interval = argv.interval;
 const range = argv.range;
 const botName = argv.bot;
 
-const mineflayer = require('mineflayer');
-const { pathfinder, Movements, goals: { GoalNear } } = require('mineflayer-pathfinder');
-
 const bot = mineflayer.createBot({ host: 'localhost', username: botName });
 
 bot.on('spawn', () => {
   // Load the pathfinder plugin and set the movements
   bot.loadPlugin(pathfinder);
   bot.pathfinder.setMovements(new Movements(bot));
-  
+
   bot.chat(`Hey, ${playerName}, I am here!`);
 
   // Check for the player every {interval} ms
