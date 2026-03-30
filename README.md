@@ -1,61 +1,44 @@
-> Make sure you have [node.js](https://nodejs.org/en/download) installed.
+# Hacking Minecraft
 
-## Bots
+Learn AI and LLMs the fun way — by building intelligent bots in Minecraft!
 
-### bot-follow-a-player
+## Getting Started
 
-This bot will follow a (nearby) player with a given name.
+1. Follow the [Setup Guide](SETUP.md) to install Node.js, PaperMC, TLauncher, and Claude Desktop/Code
+2. Head to the [Curriculum](CURRICULUM.md) for the tutorials
 
-<details>
-  <summary>Check help section</summary>
+## Project Structure
 
-  ```
-  Usage: index.js --player <name> [--interval <ms>] [--range <blocks>] [--bot
-  <name>]
-
-  Options:
-        --version   Show version number                                  [boolean]
-    -p, --player    Name of the player to follow               [string] [required]
-    -i, --interval  Interval in ms to check for the player [number] [default: 500]
-    -r, --range     Range in blocks to check for the player  [number] [default: 3]
-    -b, --bot       Name for the bot                     [string] [default: "bot"]
-    -h, --help      Show help                                            [boolean]
-  ```
-</details>
-
-```bash
-cd bot-follow-a-player
-npm install
-node index.js --player <name>
+```
+examples/
+  bot-follow-a-player/          # Tutorial 1: Bot that follows a player
+  bot-protect-a-player-from-hostile/  # Tutorial 2: Bot that protects from hostiles
+mcp/                            # Tutorial 3: MCP server for Claude-controlled bot
 ```
 
----
+## Quick Start
 
-### bot-protect-a-player-from-hostile
-
-This bot will protect a (nearby) player with a given name from hostiles.
-
-<details>
-  <summary>Check help section</summary>
-
-  ```
-  Usage: index.js --player <name> [--interval <ms>] [--range <blocks>] [--bot
-  <name>]
-
-  Options:
-        --version   Show version number                                  [boolean]
-    -p, --player    Name of the player to follow               [string] [required]
-    -i, --interval  Interval in ms to check for the player [number] [default: 500]
-    -r, --range     Range in blocks to check for the player  [number] [default: 3]
-    -b, --bot       Name for the bot                     [string] [default: "bot"]
-    -h, --help      Show help                                            [boolean]
-  ```
-</details>
+### Tutorial 1 — Bot Basics
 
 ```bash
-cd bot-protect-a-player-from-hostile
-npm install
-node index.js --player <name>
+cd examples/bot-follow-a-player
+npx tsx src/index.ts -- --player <name>
 ```
 
----
+### Tutorial 2 — Smart Bot
+
+```bash
+cd examples/bot-protect-a-player-from-hostile
+npx tsx src/index.ts -- --player <name>
+```
+
+### Tutorial 3 — MCP Server
+
+```bash
+cd mcp
+npm install
+npm run build
+npm start
+```
+
+See [CURRICULUM.md](CURRICULUM.md) for setup instructions with Claude Desktop and Claude Code.
