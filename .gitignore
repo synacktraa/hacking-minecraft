@@ -1,4 +1,10 @@
+.claude
+run-server-cmd.txt
+
 *.mp4
+
+# TypeScript build output
+dist/
 
 # Logs
 logs
