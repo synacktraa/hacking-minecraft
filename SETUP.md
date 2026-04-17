@@ -56,7 +56,7 @@ To join the server yourself and see your bots in action, you'll need a Minecraft
    - Click **Done**, then join the server
 
 > [!NOTE]
-> Make sure the Minecraft version matches your PaperMC server (e.g. if your server is 1.21.4, select OptiFine 1.21.4).
+> In step 4, make sure to select the Minecraft version you noted in step 3.1 (e.g. OptiFine 1.21.4 for a 1.21.4 server).
 
 You should now be in your local server. Leave it running while you work through the tutorials.
 
