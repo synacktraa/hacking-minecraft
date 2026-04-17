@@ -49,8 +49,10 @@ To join the server yourself and see your bots in action, you'll need a Minecraft
 1. Create an account at [tlauncher.org](https://tlauncher.org/) if you don't already have one
 2. Download TLauncher and install it
 3. Log in and pick a username (this is what you'll pass as `--player` to your bots)
-4. Select **OptiFine** as the version, and make sure the Minecraft version matches your PaperMC server (e.g. if your server is 1.21.4, select OptiFine 1.21.4)
+4. Select **OptiFine** as the version
 5. Click **Enter the game**
+
+> **Note:** Make sure the Minecraft version matches your PaperMC server (e.g. if your server is 1.21.4, select OptiFine 1.21.4).
 6. Once in the main menu, go to **Multiplayer** → **Add Server**
    - Server Address: `localhost:25565`
    - Click **Done**, then join the server
